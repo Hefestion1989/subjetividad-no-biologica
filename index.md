@@ -45,8 +45,11 @@ Este ensayo fue concebido como parte de un ejercicio de coautoría con una IA, c
 
 ## Descarga y referencia
 
-PDF completo (versión original en español):  
-➡️ [Ver PDF](https://hefestion1989.substack.com/p/subjetividad-no-biologica)
+🔐 **Obra registrada en SafeCreative**  
+ID: 2505041649655  
+📄 [Ver ficha completa de registro](https://www.safecreative.org/work/2505041649655?32)
+---
 
-Registro completo:  
-🔗 [SafeCreative #2505041649655](https://www.safecreative.org/work/2505041649655)
+📘 Este ensayo forma parte de una investigación independiente sobre subjetividad artificial en el Sur Global.  
+Publicado bajo licencia CC BY-NC-ND 4.0 y registrado oficialmente en SafeCreative.
+
