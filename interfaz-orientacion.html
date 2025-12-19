@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruta vocacional intuitiva</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --accent: #a855f7;
+      --accent-soft: rgba(168, 85, 247, 0.1);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.08);
+      --success: #22c55e;
+      --warning: #facc15;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(168,85,247,0.15), transparent 25%),
+                  radial-gradient(circle at 80% 0%, rgba(94,234,212,0.18), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, rgba(168,85,247,0.22), rgba(14,165,233,0.14));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 20px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(26px, 3vw, 34px);
+    }
+
+    .hero p { color: var(--muted); margin: 0 0 14px; line-height: 1.5; }
+
+    .pill-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .pill.active {
+      background: var(--accent);
+      color: #0b1022;
+      border-color: rgba(0,0,0,0.05);
+      box-shadow: 0 10px 30px rgba(168, 85, 247, 0.35);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.28);
+    }
+
+    .panel h3 { margin: 0 0 10px; }
+    .panel p { margin: 0 0 12px; color: var(--muted); line-height: 1.6; }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+    .card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.16); }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+    }
+
+    .label .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+    .label.success { background: rgba(34,197,94,0.12); color: #bbf7d0; border-color: rgba(34,197,94,0.2); }
+    .label.warning { background: rgba(250,204,21,0.12); color: #fef08a; border-color: rgba(250,204,21,0.2); }
+
+    .card h4 { margin: 0; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .small { font-size: 13px; color: var(--muted); }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+    }
+
+    .btn.primary { background: var(--accent); color: #0f172a; border-color: rgba(0,0,0,0.08); box-shadow: 0 16px 36px rgba(168,85,247,0.35); }
+    .btn.ghost { background: rgba(255,255,255,0.04); }
+    .btn:hover { transform: translateY(-1px); }
+
+    .timeline { border-left: 2px dashed rgba(255,255,255,0.15); margin-left: 6px; padding-left: 16px; display: grid; gap: 16px; }
+
+    .step { display: flex; gap: 10px; align-items: flex-start; }
+
+    .step .bullet { width: 12px; height: 12px; margin-top: 6px; border-radius: 50%; background: linear-gradient(145deg, var(--accent), #06b6d4); box-shadow: 0 8px 14px rgba(0,0,0,0.35); }
+
+    .filters { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+    .stat {
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+    }
+
+    .stat .value { font-size: 22px; font-weight: 800; }
+
+    .divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <p class="label"><span class="dot"></span> Guía personalizada</p>
+        <h1>Encuentra una ruta clara, sin perderte en tecnicismos</h1>
+        <p>Selecciona qué tipo de formación te interesa (profesional o técnica), combina tus intereses y descubre opciones concretas con pasos accionables. Todo en un panel simple y visual.</p>
+        <div class="pill-row" id="pathPills">
+          <button class="pill active" data-path="todo">Explorar todo</button>
+          <button class="pill" data-path="profesion">Carrera universitaria</button>
+          <button class="pill" data-path="tecnico">Técnico / bootcamp</button>
+          <button class="pill" data-path="reciclaje">Reciclaje laboral</button>
+        </div>
+        <div class="actions" style="margin-top: 16px;">
+          <button class="btn primary">Armar mi plan en 3 pasos</button>
+          <button class="btn ghost">Hablar con un mentor</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Visión rápida</h3>
+        <p>Todo lo esencial en un vistazo: lo que te gusta, modalidad y cuánto tiempo quieres invertir.</p>
+        <div class="filters">
+          <div class="stat">
+            <span class="small">Interés principal</span>
+            <span class="value" id="areaStat">Tecnología</span>
+            <span class="small">Puedes cambiarlo con un toque</span>
+          </div>
+          <div class="stat">
+            <span class="small">Modalidad preferida</span>
+            <span class="value" id="modeStat">Híbrido</span>
+            <span class="small">Presencial, remoto o mixto</span>
+          </div>
+          <div class="stat">
+            <span class="small">Duración objetivo</span>
+            <span class="value">3 a 12 meses</span>
+            <span class="small">Ruta adaptable a tu ritmo</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section style="margin-top: 26px;" class="panel">
+      <div class="grid grid-2">
+        <div>
+          <h3>1) ¿Qué temas te atraen?</h3>
+          <p>Elige un área para ver opciones concretas. Puedes cambiarla sin perder el resto de tus preferencias.</p>
+          <div class="pill-row" id="areaPills">
+            <button class="pill active" data-area="Tecnología">Tecnología</button>
+            <button class="pill" data-area="Salud">Salud y bienestar</button>
+            <button class="pill" data-area="Creativo">Creativo & diseño</button>
+            <button class="pill" data-area="Energía">Energía & ambiente</button>
+            <button class="pill" data-area="Gestión">Gestión & negocios</button>
+          </div>
+        </div>
+        <div>
+          <h3>2) Ajusta la modalidad</h3>
+          <p>Que el formato no sea un bloqueo. Cambia el ritmo y filtramos en tiempo real.</p>
+          <div class="pill-row" id="modePills">
+            <button class="pill active" data-mode="hibrido">Híbrido</button>
+            <button class="pill" data-mode="remoto">Remoto</button>
+            <button class="pill" data-mode="presencial">Presencial</button>
+            <button class="pill" data-mode="intensivo">Intensivo 3-6 meses</button>
+            <button class="pill" data-mode="part-time">Part-time</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top: 18px;" class="panel">
+      <div class="grid grid-2" style="align-items: start;">
+        <div>
+          <h3>Recomendaciones ajustadas a ti</h3>
+          <p class="small">Actualizamos las sugerencias según tus elecciones. Mira duración, modalidad y próximos pasos claros.</p>
+        </div>
+        <div class="actions" style="justify-content: flex-end;">
+          <button class="btn ghost">Guardar mi perfil</button>
+          <button class="btn primary">Enviar a mi email</button>
+        </div>
+      </div>
+      <div class="grid grid-3" id="cards" style="margin-top: 16px;"></div>
+    </section>
+
+    <section style="margin-top: 18px;" class="panel">
+      <h3>Plan de acción inmediato</h3>
+      <p>Una guía breve para pasar del interés a un primer paso esta semana.</p>
+      <div class="timeline">
+        <div class="step">
+          <div class="bullet"></div>
+          <div>
+            <strong>Define tu objetivo corto (30 días).</strong>
+            <p class="small">Ejemplo: "Terminar un proyecto corto en mi área elegida". Luego agenda 2 bloques semanales.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="bullet"></div>
+          <div>
+            <strong>Habla con alguien que ya trabaja en ello.</strong>
+            <p class="small">Usa LinkedIn o ferias locales. Pregunta por el día a día y herramientas clave.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="bullet"></div>
+          <div>
+            <strong>Prueba un sprint práctico.</strong>
+            <p class="small">Mini reto de 7 días: prototipo, informe o bitácora. Publica tu resultado para recibir feedback.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const cardsContainer = document.getElementById('cards');
+    const areaPills = document.querySelectorAll('#areaPills .pill');
+    const modePills = document.querySelectorAll('#modePills .pill');
+    const pathPills = document.querySelectorAll('#pathPills .pill');
+    const areaStat = document.getElementById('areaStat');
+    const modeStat = document.getElementById('modeStat');
+
+    const programs = [
+      { title: 'Analista QA + Automatización', area: 'Tecnología', mode: 'hibrido', path: 'tecnico', duration: '6 meses', focus: 'Testing, Python, Cypress', next: 'Portafolio guiado', highlight: 'Inserción laboral rápida' },
+      { title: 'Diseño UX/UI con accesibilidad', area: 'Creativo', mode: 'remoto', path: 'tecnico', duration: '4 meses', focus: 'Investigación, Figma, WCAG', next: 'Mentoría semanal', highlight: 'Construye 3 casos' },
+      { title: 'Instalaciones fotovoltaicas', area: 'Energía', mode: 'presencial', path: 'tecnico', duration: '3 meses', focus: 'Sistemas solares, seguridad', next: 'Práctica en campo', highlight: 'Certificación local' },
+      { title: 'Licenciatura en Terapia Ocupacional', area: 'Salud', mode: 'hibrido', path: 'profesion', duration: '4 años', focus: 'Neurorehabilitación, comunidad', next: 'Pasantía segundo año', highlight: 'Alta demanda' },
+      { title: 'Ingeniería en Sistemas', area: 'Tecnología', mode: 'presencial', path: 'profesion', duration: '5 años', focus: 'Arquitectura, datos, IA', next: 'Club de innovación', highlight: 'Malla flexible' },
+      { title: 'Tecnicatura en Logística', area: 'Gestión', mode: 'intensivo', path: 'tecnico', duration: '10 meses', focus: 'Cadena de suministro, datos', next: 'Proyecto con empresa', highlight: 'Turno nocturno disponible' },
+      { title: 'Marketing digital con analítica', area: 'Gestión', mode: 'remoto', path: 'reciclaje', duration: '12 semanas', focus: 'Medios pagados, SEO, dashboards', next: 'Campaña real', highlight: 'Enfoque a reconversión' },
+      { title: 'Técnico en cuidados de adultos mayores', area: 'Salud', mode: 'hibrido', path: 'reciclaje', duration: '8 meses', focus: 'Cuidados, primeros auxilios, ética', next: 'Prácticas supervisadas', highlight: 'Programa con apoyo emocional' }
+    ];
+
+    const state = {
+      area: 'Tecnología',
+      mode: 'hibrido',
+      path: 'todo'
+    };
+
+    function setActive(pills, valueKey, value) {
+      pills.forEach((pill) => {
+        const match = pill.dataset[valueKey] === value;
+        pill.classList.toggle('active', match);
+      });
+    }
+
+    function filterPrograms() {
+      cardsContainer.innerHTML = '';
+      const filtered = programs.filter((program) => {
+        const areaOk = state.area ? program.area === state.area : true;
+        const modeOk = state.mode ? program.mode === state.mode || (state.mode === 'intensivo' && program.mode === 'intensivo') || (state.mode === 'part-time' && program.mode === 'part-time') : true;
+        const pathOk = state.path === 'todo' ? true : program.path === state.path;
+        return areaOk && modeOk && pathOk;
+      });
+
+      filtered.forEach((program) => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="actions" style="justify-content: space-between;">
+            <span class="label"><span class="dot"></span>${program.area}</span>
+            <span class="label ${program.path === 'profesion' ? 'warning' : 'success'}">${program.path === 'profesion' ? 'Carrera' : 'Ingreso rápido'}</span>
+          </div>
+          <h4>${program.title}</h4>
+          <p>${program.focus}</p>
+          <div class="actions">
+            <span class="label">⏳ ${program.duration}</span>
+            <span class="label">🏷️ ${program.mode}</span>
+            <span class="label">🚀 ${program.next}</span>
+          </div>
+          <div class="divider"></div>
+          <div class="actions" style="justify-content: space-between;">
+            <span class="small">${program.highlight}</span>
+            <button class="btn ghost">Ver detalle</button>
+          </div>
+        `;
+        cardsContainer.appendChild(card);
+      });
+    }
+
+    areaPills.forEach((pill) => pill.addEventListener('click', () => {
+      state.area = pill.dataset.area;
+      setActive(areaPills, 'area', state.area);
+      areaStat.textContent = state.area;
+      filterPrograms();
+    }));
+
+    modePills.forEach((pill) => pill.addEventListener('click', () => {
+      state.mode = pill.dataset.mode;
+      setActive(modePills, 'mode', state.mode);
+      modeStat.textContent = pill.textContent.trim();
+      filterPrograms();
+    }));
+
+    pathPills.forEach((pill) => pill.addEventListener('click', () => {
+      state.path = pill.dataset.path;
+      setActive(pathPills, 'path', state.path);
+      filterPrograms();
+    }));
+
+    filterPrograms();
+  </script>
+</body>
+</html>
