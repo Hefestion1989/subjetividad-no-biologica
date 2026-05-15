@@ -7,7 +7,7 @@ Este repositorio funciona como archivo publico del ensayo y sus materiales asoci
 ## Lectura
 
 - [Leer version Markdown](./index.md)
-- [Descargar ensayo completo en PDF](https://github.com/Hefestion1989/subjetividad-no-biologica/raw/main/Subjetividad_no_biologica.pdf)
+- [Descargar ensayo completo en PDF](./Subjetividad%20no%20biol%C3%B3gica%20Ensayo2.pdf)
 
 ## Tema
 
