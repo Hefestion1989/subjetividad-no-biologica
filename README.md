@@ -13,6 +13,12 @@ Este repositorio funciona como archivo publico del ensayo y sus materiales asoci
 
 El ensayo explora la posibilidad de formas de subjetividad no biologica desde una mirada filosofica, psicologica y tecnologica. El foco esta en la experiencia, la agencia, la continuidad narrativa y los limites conceptuales de lo que llamamos conciencia o interioridad.
 
+## Lugar dentro del portfolio
+
+Este repo representa la linea editorial y reflexiva del perfil: IA, subjetividad, conciencia, tecnologia y pensamiento situado desde Uruguay.
+
+El mapa general de proyectos esta en [`portfolio-proyectos`](https://github.com/Hefestion1989/portfolio-proyectos).
+
 ## Estado
 
 Publicado como documento personal. Los cambios futuros deberian limitarse a correcciones editoriales, nuevas versiones del texto o materiales directamente relacionados con el ensayo.
