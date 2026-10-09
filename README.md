@@ -22,3 +22,7 @@ El mapa general de proyectos esta en [`portfolio-proyectos`](https://github.com/
 ## Estado
 
 Publicado como documento personal. Los cambios futuros deberian limitarse a correcciones editoriales, nuevas versiones del texto o materiales directamente relacionados con el ensayo.
+
+## Build para ChatGPT Sites
+
+`npm ci && npm run build:sites` genera una página de lectura en `dist/` y copia el ensayo completo como `ensayo.pdf`, junto con los metadatos de Sites. Los textos y el PDF originales permanecen iguales. La publicación requiere vincular este repositorio a un proyecto de Sites.

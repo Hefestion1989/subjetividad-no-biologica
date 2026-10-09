@@ -1,0 +1,11 @@
+{
+  "name": "subjetividad-no-biologica",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:sites": "node scripts/build-sites.mjs"
+  },
+  "devDependencies": {
+    "marked": "18.1.0"
+  }
+}
